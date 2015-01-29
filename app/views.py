@@ -3,9 +3,14 @@
 from flask import render_template, flash
 from app import app
 from forms import TrainerIdForm
+import pymongo
 
+import datetime
 import random
 
+uriString = app.config['MONGOSOUP_URL']
+client = pymongo.MongoClient(uriString)
+db = client.get_default_database()
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -19,9 +24,21 @@ def index():
 			else:
 				try:
 					code = get_code(int(trainer_id))
-					return render_template("index.html", form=form, code=code)
 				except:
 					flash('Something went wrong. :(  Contact shantytownred@gmail.com so he can fix it!')
+					return render_template("index.html", form=form)
+
+				html = render_template("index.html", form=form, code=code)
+				try:
+					code = {
+						'date': datetime.datetime.utcnow(),
+						'trainer_id': trainer_id,
+						'numbers': code,
+					}
+					db.codes.insert(code)
+				except:
+					pass
+				return html
 		else:
 			flash('You entered an invalid Trainer ID "%s". The Trainer ID must be a number between 0-65535.' % (form.trainer_id.data))
 
