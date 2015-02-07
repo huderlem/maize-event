@@ -8,8 +8,8 @@ import pymongo
 import datetime
 import random
 
-uriString = app.config['MONGOSOUP_URL']
-client = pymongo.MongoClient(uriString)
+# uriString = app.config['MONGOSOUP_URL']
+# client = pymongo.MongoClient(uriString)
 # db = client.get_default_database()
 
 @app.route('/', methods=['GET', 'POST'])
