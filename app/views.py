@@ -10,7 +10,7 @@ import random
 
 uriString = app.config['MONGOSOUP_URL']
 client = pymongo.MongoClient(uriString)
-db = client.get_default_database()
+# db = client.get_default_database()
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -35,7 +35,7 @@ def index():
 						'trainer_id': trainer_id,
 						'numbers': code,
 					}
-					db.codes.insert(code)
+					# db.codes.insert(code)
 				except:
 					pass
 				return html
