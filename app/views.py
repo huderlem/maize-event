@@ -46,15 +46,15 @@ def index():
 
 def get_code(trainer_id):
 	# sunglasses squirtle
-	mon_id = 0xb1 # Squirtle
-	move_1 = 0x21 # Tackle
-	move_2 = 0x2d # Growl
-	move_3 = 0
+	mon_id = 0x54 # Pikachu
+	move_1 = random.choice([0x13, 0x39]) # Fly / Surf
+	move_2 = 0x54 # Thundershock
+	move_3 = 0x2d # Growl
 	move_4 = 0
-	spdspc_iv = random.randint(0, 255) # random DVs
-	atkdef_iv = random.randint(0, 255) # random DVs
+	spdspc_iv = 0xaa # shiny DVs
+	atkdef_iv = 0xaa # shiny DVs
 	level = 0x5
-	alt_sprite = 0x10
+	alt_sprite = 0x0
 
 	return gen_code(mon_id, move_1, move_2, move_3, move_4, spdspc_iv, atkdef_iv, level, alt_sprite, trainer_id)
 
